@@ -1,4 +1,5 @@
 const map = L.map('map').setView([18.5204, 73.8567], 12); // Pune, India
+
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
@@ -24,3 +25,4 @@ for (let i = 0; i < markerLocations.length; i++) {
     L.marker(markerLocations[i]).addTo(map)
        .bindPopup(`Location ${i + 1}`).openPopup();
 }
+
