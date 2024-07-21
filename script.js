@@ -1,46 +1,64 @@
-mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
-var map = new mapboxgl.Map({
-  container: 'map',
-  style: 'mapbox://styles/mapbox/streets-v11',
-  center: [73.8567, 18.5204], // Pune coordinates
-  zoom: 13
-});
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #d9f2ff;
+}
 
-// Create an animated character icon
-var characterElement = document.createElement('div');
-characterElement.className = 'character character-animation';
+#map-container {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-var characterMarker = new mapboxgl.Marker({
-  element: characterElement,
-  anchor: 'bottom'
-}).setLngLat([73.8567, 18.5204])
-  .addTo(map);
+#map {
+  width: 100%;
+  height: 100%;
+}
 
-// Create animated coins
-var coins = [
-  { lat: 18.51, lng: 73.85 },
-  { lat: 18.52, lng: 73.86 },
-  { lat: 18.53, lng: 73.87 }
-];
+.player-info {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+  border-radius: 5px;
+}
 
-coins.forEach(function(coin) {
-  var coinElement = document.createElement('div');
-  coinElement.className = 'coin coin-animation'; // Add animation class if needed
+.player-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
 
-  new mapboxgl.Marker({
-    element: coinElement,
-    anchor: 'bottom'
-  }).setLngLat([coin.lng, coin.lat])
-    .addTo(map);
-});
+.player-name {
+  font-size: 16px;
+  font-weight: bold;
+}
 
-// Update character position based on user's location
-navigator.geolocation.watchPosition(function(position) {
-  var userLat = position.coords.latitude;
-  var userLng = position.coords.longitude;
+.player-level {
+  font-size: 14px;
+  color: #666;
+}
 
-  characterMarker.setLngLat([userLng, userLat]);
-  map.setCenter([userLng, userLat]);
-}, function(error) {
-  console.error('Error getting location:', error);
-});
+.icon-container {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pokemon-icon, .pokeball-icon, .compass-icon, .item-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin: 10px;
+}
