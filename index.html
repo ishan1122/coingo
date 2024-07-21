@@ -6,7 +6,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
-        /* Include the updated CSS here */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
+        #map-container {
+            position: relative;
+            height: 100vh;
+        }
+        #map {
+            height: 100%;
+        }
+        .player-info {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .player-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        .icon-container {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .icon-container img {
+            width: 30px;
+            height: 30px;
+            margin-bottom: 5px;
+        }
+        .location-marker {
+            background-color: #007bff; /* Blue */
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            position: absolute;
+            z-index: 10; /* Ensure it's above the map */
+            pointer-events: none; /* Prevent clicks from passing through */
+        }
     </style>
 </head>
 <body>
@@ -23,22 +71,60 @@
             <img class="compass-icon" src="comp.jpeg" alt="Compass Icon">
             <img class="item-icon" src="item.png" alt="Item Icon">
         </div>
+        <div class="location-marker" id="marker-1">1</div>
+        <div class="location-marker" id="marker-2">2</div>
+        <div class="location-marker" id="marker-3">3</div>
+        <div class="location-marker" id="marker-4">4</div>
+        <div class="location-marker" id="marker-5">5</div>
+        <div class="location-marker" id="marker-6">6</div>
+        <div class="location-marker" id="marker-7">7</div>
+        <div class="location-marker" id="marker-8">8</div>
+        <div class="location-marker" id="marker-9">9</div>
+        <div class="location-marker" id="marker-10">10</div>
+        <div class="location-marker" id="marker-11">11</div>
+        <div class="location-marker" id="marker-12">12</div>
+        <div class="location-marker" id="marker-13">13</div>
+        <div class="location-marker" id="marker-14">14</div>
+        <div class="location-marker" id="marker-15">15</div>
+        <div class="location-marker" id="marker-16">16</div>
     </div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <script>
-        // Initialize the map
-        const map = L.map('map').setView([51.505, -0.09], 13); // Replace with your starting coordinates and zoom level
-
-        // Add OpenStreetMap tile layer
+        const map = L.map('map').setView([51.505, -0.09], 13);
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-
-        // Add a marker as an example
-        L.marker([51.5, -0.09]).addTo(map)
-            .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
-            .openPopup();
+        // Sample marker placement logic (replace with your game logic)
+        const markerLocations = [
+            [51.5, -0.09],
+            [51.51, -0.08],
+            [51.52, -0.07],
+            [51.53, -0.06],
+            [51.54, -0.05],
+            [51.55, -0.04],
+            [51.56, -0.03],
+            [51.57, -0.02],
+            [51.58, -0.01],
+            [51.59, 0],
+            [51.6, 0.01],
+            [51.61, 0.02],
+            [51.62, 0.03],
+            [51.63, 0.04],
+            [51.64, 0.05],
+            [51.65, 0.06],
+        ];
+        for (let i = 0; i < markerLocations.length; i++) {
+            L.marker(markerLocations[i]).addTo(map)
+                .bindPopup(`Location ${i + 1}`).openPopup();
+            const markerElement = document.getElementById(`marker-${i + 1}`);
+            if (markerElement) {
+                const mapContainer = document.getElementById('map-container');
+                const markerLatLng = markerLocations[i];
+                const mapLatLng = map.latLngToContainerPoint(markerLatLng);
+                markerElement.style.left = mapLatLng.x + 'px';
+                markerElement.style.top = mapLatLng.y + 'px';
+            }
+        }
     </script>
 </body>
 </html>
-
