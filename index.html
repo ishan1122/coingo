@@ -1,15 +1,28 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
+  <title>Coin Hunt Game</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Coin Hunt Game</title>
-  <link rel="stylesheet" href="styles.css" />
-  <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.js"></script>
-  <link href="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.css" />
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="map"></div>
+  <div id="map-container">
+    <div id="map"></div>
+    <div class="player-info">
+      <img class="player-image" src="images/your_player_image.jpg" alt="Player Image">
+      <div class="player-name">Player0000</div>
+      <div class="player-level">Level 38</div>
+    </div>
+    <div class="icon-container">
+      <img class="pokemon-icon" src="images/your_pokemon_icon.png" alt="Pokemon Icon">
+      <img class="pokeball-icon" src="images/your_pokeball_icon.png" alt="Pokeball Icon">
+      <img class="compass-icon" src="images/your_compass_icon.png" alt="Compass Icon">
+      <img class="item-icon" src="images/your_item_icon.png" alt="Item Icon">
+    </div>
+  </div>
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
