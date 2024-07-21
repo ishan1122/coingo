@@ -17,7 +17,7 @@ body {
 
 .player-info {
     position: absolute;
-    bottom: 10px;
+    bottom: 70px; /* Adjust to fit the bottom container */
     left: 10px;
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
@@ -32,10 +32,19 @@ body {
     margin-right: 10px;
 }
 
+.bottom-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    border-top: 1px solid #333;
+}
+
 .icon-container {
-    position: absolute;
-    top: 10px;
-    right: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -45,18 +54,15 @@ body {
     width: 30px;
     height: 30px;
     margin-bottom: 5px;
+    border-radius: 50%; /* Circular icons */
 }
 
 .location-marker {
-    background-color: #007bff; /* Blue */
+    background-color: #ff69b4; /* Pink */
     color: white;
     padding: 5px 10px;
     border-radius: 5px;
     position: absolute;
     z-index: 10; /* Ensure it's above the map */
     pointer-events: none; /* Prevent clicks from passing through */
-}
-
-#current-location-marker {
-    background-color: #ff69b4; /* Pink */
 }
