@@ -1,64 +1,26 @@
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #d9f2ff;
-}
+const map = L.map('map').setView([18.5204, 73.8567], 12); // Pune, India
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
 
-#map-container {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+// Add current location marker
+const currentLocationMarker = L.marker([18.5204, 73.8567]).addTo(map);
+currentLocationMarker.bindPopup('You are here!').openPopup();
 
-#map {
-  width: 100%;
-  height: 100%;
-}
+// Update current location marker position on map move
+map.on('move', () => {
+    const currentLocation = map.getCenter();
+    currentLocationMarker.setLatLng(currentLocation);
+});
 
-.player-info {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  display: flex;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.8);
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.player-image {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  margin-right: 10px;
-}
-
-.player-name {
-  font-size: 16px;
-  font-weight: bold;
-}
-
-.player-level {
-  font-size: 14px;
-  color: #666;
-}
-
-.icon-container {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.pokemon-icon, .pokeball-icon, .compass-icon, .item-icon {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  margin: 10px;
+// Add other markers (replace with your game logic)
+const markerLocations = [
+    [18.5214, 73.8577],
+    [18.5224, 73.8587],
+    [18.5234, 73.8597],
+    //...
+];
+for (let i = 0; i < markerLocations.length; i++) {
+    L.marker(markerLocations[i]).addTo(map)
+       .bindPopup(`Location ${i + 1}`).openPopup();
 }
