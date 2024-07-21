@@ -1,1 +1,9 @@
+.character-icon .character {
+    width: 30px;
+    height: 30px;
+    background-image: url('your_character_image.png'); /* Replace with your character image */
+    background-size: cover;
+    background-position: center;
+    border-radius: 50%;
+}
 
