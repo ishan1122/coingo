@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Interactive Map with Character</title>
+    <title>Pokemon GO Interface</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -9,37 +9,46 @@
         body {
             margin: 0;
             padding: 0;
-            font-family: sans-serif;
             background-color: #d9f2ff;
+            font-family: sans-serif;
         }
 
         #map-container {
             position: relative;
             width: 100%;
-            height: 80vh;
+            height: 80vh; /* Adjust height as needed */
         }
 
         #map {
             width: 100%;
             height: 100%;
+            border: 1px solid #ccc;
+            border-radius: 10px;
         }
 
         .player-info {
             position: fixed;
             top: 10px;
             left: 10px;
+            display: flex;
+            align-items: center;
             background-color: rgba(0, 0, 0, 0.7);
             color: white;
-            padding: 15px;
-            border-radius: 5px;
+            padding: 10px;
+            border-radius: 10px;
             font-weight: bold;
+            z-index: 1000; /* Ensure it's above other elements */
         }
 
         .player-image {
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             margin-right: 10px;
+        }
+
+        .player-name, .player-level {
+            font-size: 16px;
         }
 
         .icon-container {
@@ -49,25 +58,17 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: black;
             padding: 10px;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
             box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
         }
 
         .icon-container img {
             width: 60px;
             height: 60px;
-            border-radius: 50%;
-            margin: 10px;
-        }
-
-        .character-icon {
-            width: 40px;
-            height: 40px;
-            background-image: url('your_character_image.png'); /* Replace with your character image */
-            background-size: cover;
-            background-position: center;
-            border-radius: 50%;
+            margin: 0 10px;
         }
     </style>
 </head>
@@ -76,17 +77,40 @@
         <div id="map"></div>
         <div class="player-info">
             <img class="player-image" src="ksi.jpeg" alt="Player Image">
-            <div class="player-name">Player0000</div>
-            <div class="player-level">Level 38</div>
+            <div>
+                <div class="player-name">Player0000</div>
+                <div class="player-level">Level 38</div>
+            </div>
         </div>
     </div>
     <div class="icon-container">
         <img class="pokemon-icon" src="pok.jpeg" alt="Pokemon Icon">
         <img class="pokeball-icon" src="btcp.jpeg" alt="Pokeball Icon">
         <img class="compass-icon" src="comp.jpeg" alt="Compass Icon">
+        <img class="item-icon" src="item.png" alt="Item Icon">
     </div>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="script.js"></script>
+    <script>
+        // Initialize the map
+        const map = L.map('map').setView([18.5204, 73.8567], 12); // Center on Pune
+
+        // Add tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Add a marker for the current location
+        const characterIcon = L.icon({
+            iconUrl: 'character.png', // Replace with your character image file
+            iconSize: [32, 32], // Size of the icon
+            iconAnchor: [16, 32], // Point of the icon which will correspond to marker's location
+            popupAnchor: [0, -32] // Point from which the popup should open relative to the iconAnchor
+        });
+
+        const currentLocationMarker = L.marker([18.5204, 73.8567], { icon: characterIcon }).addTo(map);
+        currentLocationMarker.bindPopup('You are here!').openPopup();
+    </script>
 </body>
 </html>
+
 
