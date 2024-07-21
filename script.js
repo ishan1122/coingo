@@ -6,11 +6,11 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
 
-// Add a character as a marker with an animation
+// Add a character as a marker
 const characterIcon = L.divIcon({
     className: 'character-icon',
-    html: `<div class="character"></div>`,
-    iconSize: [30, 30]
+    html: '<div class="character-icon"></div>',
+    iconSize: [40, 40]
 });
 
 const characterMarker = L.marker([18.5204, 73.8567], { icon: characterIcon }).addTo(map);
@@ -28,4 +28,3 @@ function moveCharacter() {
 }
 
 moveCharacter();
-
