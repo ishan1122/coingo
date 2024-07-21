@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>COIN GO</title>
+    <title>Pokemon GO Interface</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -69,6 +69,17 @@
             width: 60px;
             height: 60px;
             margin: 0 10px;
+            background-color: transparent; /* Remove white background */
+            border-radius: 0; /* No extra border radius */
+        }
+
+        /* Style the leaflet zoom controls to be positioned below player info */
+        .leaflet-control-container {
+            margin-top: 60px; /* Adjust based on player info height */
+        }
+
+        .leaflet-control-zoom {
+            z-index: 1000; /* Ensure it's above the map */
         }
     </style>
 </head>
