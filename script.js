@@ -1,33 +1,37 @@
-// Initialize the map
-var map = L.map('map').setView([51.505, -0.09], 15);
-
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-}).addTo(map);
-
-// Create custom icons
-var characterIcon = L.divIcon({
-  className: 'character',
-  iconSize: [40, 40]
+mapboxgl.accessToken = 'YOUR_MAPBOX_ACCESS_TOKEN';
+var map = new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/mapbox/streets-v11',
+  center: [73.8567, 18.5204], // Pune coordinates
+  zoom: 13
 });
 
-var coinIcon = L.divIcon({
-  className: 'coin coin-animation',
-  iconSize: [32, 32]
-});
+// Create an animated character icon
+var characterElement = document.createElement('div');
+characterElement.className = 'character character-animation';
 
-// Add character marker
-var characterMarker = L.marker([51.505, -0.09], { icon: characterIcon }).addTo(map);
+var characterMarker = new mapboxgl.Marker({
+  element: characterElement,
+  anchor: 'bottom'
+}).setLngLat([73.8567, 18.5204])
+  .addTo(map);
 
-// Add coins to the map
+// Create animated coins
 var coins = [
-  { lat: 51.51, lng: -0.1 },
-  { lat: 51.52, lng: -0.12 },
-  { lat: 51.53, lng: -0.08 }
+  { lat: 18.51, lng: 73.85 },
+  { lat: 18.52, lng: 73.86 },
+  { lat: 18.53, lng: 73.87 }
 ];
 
 coins.forEach(function(coin) {
-  L.marker([coin.lat, coin.lng], { icon: coinIcon }).addTo(map);
+  var coinElement = document.createElement('div');
+  coinElement.className = 'coin coin-animation'; // Add animation class if needed
+
+  new mapboxgl.Marker({
+    element: coinElement,
+    anchor: 'bottom'
+  }).setLngLat([coin.lng, coin.lat])
+    .addTo(map);
 });
 
 // Update character position based on user's location
@@ -35,8 +39,8 @@ navigator.geolocation.watchPosition(function(position) {
   var userLat = position.coords.latitude;
   var userLng = position.coords.longitude;
 
-  characterMarker.setLatLng([userLat, userLng]);
-  map.setView([userLat, userLng], 15);
+  characterMarker.setLngLat([userLng, userLat]);
+  map.setCenter([userLng, userLat]);
 }, function(error) {
   console.error('Error getting location:', error);
 });
