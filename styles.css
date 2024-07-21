@@ -16,3 +16,25 @@
     border-radius: 5px;
     font-weight: bold;
 }
+.icon-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: black; /* Ensure the background is black */
+    padding: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.icon-container img {
+    width: 60px;
+    height: 60px;
+    margin: 0 10px;
+    background-color: transparent; /* Ensure no background color is applied */
+    border-radius: 0; /* No extra border radius */
+    box-shadow: none; /* Remove any shadow to ensure no background */
+}
