@@ -1,29 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Coin Hunt Game</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
-    <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-    <div id="map-container">
-        <div id="map"></div>
-        <div class="player-info">
-            <img class="player-image" src="ksi.jpeg" alt="Player Image">
-            <div class="player-name">Player0000</div>
-            <div class="player-level">Level 38</div>
-        </div>
-        <div class="icon-container">
-            <img class="pokemon-icon" src="pok.jpeg" alt="Pokemon Icon">
-            <img class="pokeball-icon" src="btcp.jpeg" alt="Pokeball Icon">
-            <img class="compass-icon" src="comp.jpeg" alt="Compass Icon">
-            <img class="item-icon" src="item.png" alt="Item Icon">
-        </div>
-        <div class="location-marker" id="current-location-marker">You</div>
+<!-- HTML -->
+<div id="map-container">
+    <div id="map"></div>
+    <div class="icon-container">
+        <!-- Font icon images will go here -->
     </div>
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-    <script src="script.js"></script>
-</body>
-</html>
+</div>
+
+<!-- CSS -->
+.icon-container {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.icon-container img {
+    width: 30px;
+    height: 30px;
+    margin: 10px;
+}
+
+<!-- JS -->
+const map = L.map('map').setView([18.5204, 73.8567], 12);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+}).addTo(map);
+
+// Set map bounds to Pune
+map.setMaxBounds([[18.3, 73.7], [18.7, 74.1]]);
+
+// Request user location
+navigator.geolocation.getCurrentPosition(position => {
+    const currentLocation = [position.coords.latitude, position.coords.longitude];
+    const characterMarker = L.marker(currentLocation, {
+        icon: L.icon({
+            iconUrl: 'character.png',
+            iconSize: [30, 30]
+        })
+    }).addTo(map);
+    characterMarker.bindPopup('You are here!').openPopup();
+});
