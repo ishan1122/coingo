@@ -1,28 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Coin Hunt Game</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.css" />
-  <link rel="stylesheet" href="styles.css">
+    <title>Coin Hunt Game</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        /* Include the updated CSS here */
+    </style>
 </head>
 <body>
-  <div id="map-container">
-    <div id="map"></div>
-    <div class="player-info">
-      <img class="player-image" src="images/your_player_image.jpg" alt="Player Image">
-      <div class="player-name">Player0000</div>
-      <div class="player-level">Level 38</div>
+    <div id="map-container">
+        <div id="map"></div>
+        <div class="player-info">
+            <img class="player-image" src="images/your_player_image.jpg" alt="Player Image">
+            <div class="player-name">Player0000</div>
+            <div class="player-level">Level 38</div>
+        </div>
+        <div class="icon-container">
+            <img class="pokemon-icon" src="images/your_pokemon_icon.png" alt="Pokemon Icon">
+            <img class="pokeball-icon" src="images/your_pokeball_icon.png" alt="Pokeball Icon">
+            <img class="compass-icon" src="images/your_compass_icon.png" alt="Compass Icon">
+            <img class="item-icon" src="images/your_item_icon.png" alt="Item Icon">
+        </div>
     </div>
-    <div class="icon-container">
-      <img class="pokemon-icon" src="images/your_pokemon_icon.png" alt="Pokemon Icon">
-      <img class="pokeball-icon" src="images/your_pokeball_icon.png" alt="Pokeball Icon">
-      <img class="compass-icon" src="images/your_compass_icon.png" alt="Compass Icon">
-      <img class="item-icon" src="images/your_item_icon.png" alt="Item Icon">
-    </div>
-  </div>
-  <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.1/mapbox-gl.js"></script>
-  <script src="script.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Initialize the map
+        const map = L.map('map').setView([51.505, -0.09], 13); // Replace with your starting coordinates and zoom level
+
+        // Add OpenStreetMap tile layer
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Add a marker as an example
+        L.marker([51.5, -0.09]).addTo(map)
+            .bindPopup('A pretty CSS3 popup.<br> Easily customizable.')
+            .openPopup();
+    </script>
 </body>
 </html>
+
